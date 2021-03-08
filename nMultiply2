@@ -1,0 +1,30 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+int nMultiply(int number, int result)
+{
+	int i;
+
+	i = 1;
+	while ( i <= number) 
+{
+	result *= 2;
+	i++;
+}
+
+return result;
+}
+
+int main(void)
+{
+	int n;
+	int result = 1;
+
+	printf(“Enter a number: “);
+	scanf(“%d”, &n);
+
+	result = nMultiply(n, result);
+	printf(“%d\n”, result);
+}
+	
+
