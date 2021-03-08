@@ -21,15 +21,16 @@ int main(void)
 
 	while (1)
 	{
-		printf(“Input a number:  “);
-		scanf(“%d”, &n);
+		printf("Input a number : ");
+		scanf("%d", &n);
+
+
+		if (n == -1)
+			break;
+
+
+		result = total(n);
+		printf("1부터 %d까지의 합은 %d\n", n, result);
 	}
-	
-	if ( n == -1)
-  	  	break;
-
-	result = total(n);
-	printf(“1부터 %d까지의 합은 %d\n”, n, result);
-
 }
 
