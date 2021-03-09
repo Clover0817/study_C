@@ -1,0 +1,42 @@
+#define SIZE 5
+#include <stdio.h>
+
+void echo(int* a)
+{
+	int i;
+	
+	for (i = 0; i < SIZE; i++)
+		scanf("%d", &a[i]);
+
+
+	for (i = 0; i < SIZE; i++)
+		printf("%d ", a[i]);
+	printf("\n");
+}
+
+void reverse(int a[])
+{
+	int i;
+	int temp;
+
+	for (i = 0; i < SIZE / 2; i++)
+	{
+		temp = a[SIZE - i -1];
+		a[SIZE - i - 1] = a[i];
+		a[i] = temp;
+	}
+
+	for (i = 0; i < SIZE; i++)
+		printf("%d ", a[i]);
+	printf("\n");
+}
+
+int main(void)
+{
+	int a[SIZE];
+
+	echo(a);
+	reverse(a);
+
+	return 0;
+}
