@@ -1,0 +1,39 @@
+#define SIZE 100
+#include <stdio.h>
+
+void input(char* a) 
+{
+	printf("Enter your name: ");
+	scanf("%s", a);
+}
+
+void reverse(char a[])
+{
+	int i, aSize = 0;
+	char temp;
+
+	printf("Reverse: ");
+	for (i = 0; a[i] != '\0'; i++)
+		aSize++;
+	
+	for (i = 0; i < aSize / 2; i++) {
+		temp = a[aSize - i - 1];
+		a[aSize - i - 1] = a[i];
+		a[i] = temp;
+	}
+
+	for (i = 0; i < aSize; i++)
+		printf("%c", a[i]);
+	printf("\n");
+	
+}
+
+int main(void)
+{
+	char a[SIZE];
+	
+	input(a);
+	reverse(a);
+
+	return 0;
+}
