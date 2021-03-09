@@ -1,0 +1,23 @@
+#define SIZE 100
+#include <stdio.h>
+
+int main(void)
+{
+	char s[SIZE];
+	char c;
+	int i, count = 0;
+
+	printf("Enter a String: ");
+	fgets(s, SIZE, stdin);
+	printf("Enter a character: ");
+	scanf(" %c", &c);
+
+	for (i = 0; s[i] != '\0'; i++) {
+		if (s[i] == c)
+			count++;
+	}
+
+	printf("'%c' is appeared %d times\n", c, count);
+
+	return 0;
+}
