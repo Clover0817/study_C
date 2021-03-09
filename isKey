@@ -1,39 +1,39 @@
 #include <stdio.h>
-#define SIZE 5;
-
-int isKey(int *a, int size, int key, int keyIndex)
+#define SIZE 5
+int isKey(int* a, int size, int key, int keyIndex)
 {
 	int i;
 
 	for (i = 0; i < size; i++) {
-		if ( a[i] == key) {
-      keyIndex = ( i + 1);
-      break;
-    }
+		if (a[i] == key) {
+			keyIndex = (i + 1);
+			break;
+		}
 	}
 
 	return keyIndex;
 }
 
 int main(void)
-{ 
+{
 	int a[SIZE];
+	int i;
 	int key;
 	int keyIndex = -1;
 
-	printf(“Enter 5개의 정수: “);
+	printf("Enter 5개의 정수 : ");
 	for (i = 0; i < SIZE; i++)
-      scanf(“%d”, &a[i]);
+		scanf("%d", &a[i]);
 
-  printf(“Enter a key: “);
-  scanf(“%d”, &key);
+	printf("Enter a key : ");
+	scanf("%d", &key);
 
-  keyIndex = isKey(a, SIZE, key, keyIndex);
-  
-  if (isKey(a, key) == -1)
-  	printf(“없다\n”);
-  else
-  	printf(“%d번째에 있다\n”, keyIndex);
+	keyIndex = isKey(a, SIZE, key, keyIndex);
 
-  return 0;
+	if (keyIndex == -1)
+		printf("없다\n");
+	else
+		printf("%d번째에 있다\n", keyIndex);
+
+	return 0;
 }
