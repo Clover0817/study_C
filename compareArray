@@ -1,0 +1,42 @@
+#define SIZE 5
+#include <stdio.h>
+
+void makeArray(int* array)
+{
+	int i;
+
+	for (i = 0; i < SIZE; i++)
+		scanf("%d", &array[i]);
+}
+int compareArray(int* a, int* b)
+{
+	int i;
+	int same = 1;
+
+	for (i = 0; i < SIZE; i++) {
+		if (a[i] != b[i]) {
+			same = 0;
+			break;
+		}
+	}
+
+	return same;
+}
+
+int main(void)
+{
+	int a[SIZE];
+	int b[SIZE];
+
+	printf("Enter 첫번째 배열: ");
+	makeArray(a);
+	printf("Enter 두번째 배열: ");
+	makeArray(b);
+
+	if (compareArray(a, b))
+		printf("두 개의 배열은 같다\n");
+	else
+		printf("두 개의 배열은 다르다\n");
+
+	return 0;
+}
