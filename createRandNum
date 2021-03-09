@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+void randomNum()
+{
+	int i;
+
+	srand(time(NULL));
+
+	printf("생성 번호: ");
+	for (i = 0; i < 6; i++)
+		printf("%d ", rand() % 46);
+	printf("\n");
+}
+int main(void)
+{
+	char r = 'y';
+	printf("*** 로또 번호 생성기 ***\n");
+	
+	while (r != 'n') {
+		randomNum();
+
+		printf("다시 생성하겠습니까? (y/n): ");
+		scanf("%c", &r);
+
+		while (getchar() != '\n');
+	}
+}
+
