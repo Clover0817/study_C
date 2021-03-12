@@ -1,0 +1,145 @@
+#define SIZE 3
+#include <stdio.h>
+
+void display(int a[][SIZE], int size)
+{
+	int i, j;
+
+	printf("   ");
+	for (i = 0; i < size; i++) {
+		printf(" %d", i);
+	}
+	printf("\n   ");
+	for (i = 0; i < size; i++) {
+		printf("--");
+	}
+
+	for (i = 0; i < size; i++) {
+		printf("\n%d |", i);
+		for (j = 0; j < size; j++) {
+			printf(" %c", a[i][j]);
+		}
+	}
+	printf("\n");
+}
+
+int winCheck(int b[][SIZE], int size, char turn, int r, int c)
+{
+	int i, j;
+	int num = 0;
+
+	if (b[r - 1][c] == turn || b[r + 1][c] == turn) {
+		for (i = 0; i < size; i++) {
+			if (b[i][c] == turn)
+				num++;
+			else
+				num = 0;
+
+			if (num == 3)
+			{
+				return 1;
+				break;
+			}
+		}
+	}
+
+	num = 0;
+	if (b[r][c - 1] == turn || b[r][c + 1] == turn) {
+		for (j = 0; j < size; j++) {
+			if (b[r][j] == turn)
+				num++;
+			else
+				num = 0;
+
+			if (num == 3)
+			{
+				return 1;
+				break;
+			}
+		}
+	}
+
+	num = 0;
+	if (b[r - 1][c - 1] == turn || b[r + 1][c + 1] == turn) {
+		for (i = 0; i < size; i++) {
+			if (b[i][i] == turn)
+				num++;
+			else
+				num = 0;
+
+			if (num == 3)
+			{
+				return 1;
+				break;
+			}
+		}
+	}
+
+	num = 0;
+	if (b[r - 1][c + 1] == turn || b[r + 1][c - 1] == turn) {
+		for (i = 0; i < size; i++) {
+			if (b[size - i - 1][i] == turn)
+				num++;
+			else
+				num = 0;
+
+			if (num == 3)
+			{
+				return 1;
+				break;
+			}
+		}
+	}
+
+	return 0;
+
+}
+int main(void)
+{
+	int board[SIZE][SIZE];
+	int i, j, r, c;
+	int count = 0;
+	char turn = 'X';
+	int winner = 0;
+
+	for (i = 0; i < SIZE; i++)
+		for (j = 0; j < SIZE; j++)
+			board[i][j] = ' ';
+
+	display(board, SIZE);
+
+	do
+	{
+
+		printf("Player %c(행 열):", turn);
+		scanf("%d %d", &r, &c);
+
+		if (r < 0 || r >= SIZE || c < 0 || c >= SIZE)
+			continue;
+		else if (board[r][c] != ' ')
+			continue;
+		else
+		{
+			board[r][c] = turn;
+			count++;
+		}
+
+		winner = winCheck(board, SIZE, turn, r, c);
+
+		if (winner == 1)
+		{
+			display(board, SIZE);
+			printf("Player %c wins!\n", turn);
+			break;
+		}
+
+		display(board, SIZE);
+		turn = (turn == 'X' ? 'O' : 'X');
+
+	} while (count < SIZE * SIZE);
+
+	if ((count == SIZE * SIZE) && (winner == 0))
+		printf("Nobody wins!\n");
+
+	return 0;
+}
