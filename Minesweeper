@@ -1,0 +1,50 @@
+#include<stdio.h>
+#define X_VALUE 5 
+#define Y_VALUE 5 
+
+void readBombInfo(char grid[][Y_VALUE + 1])
+{
+    int i;
+ 
+    printf("Input Grid\n");
+    for (i = 0; i < X_VALUE; i++)
+        scanf("%s", grid[i]);
+}
+void countBomb(char grid[][Y_VALUE + 1], int numOfBombs[][Y_VALUE])
+{
+    int i, j;
+    int r, c;
+
+
+    for (i = 0; i < X_VALUE; i++)
+        for (j = 0; j < Y_VALUE; j++)
+            if (grid[i][j] == '*') {
+                for (r = i - 1; r <= i + 1; r++)
+                    for (c = j - 1; c <= j + 1; c++)
+                        if (r >= 0 && r < X_VALUE && c >= 0 && c < Y_VALUE)
+                            numOfBombs[r][c] += 1;
+
+            }
+}
+void display_numOfBombs(char grid[][Y_VALUE + 1], int numOfBombs[][Y_VALUE])
+{
+    int i, j;
+
+    for (i = 0; i < X_VALUE; i++) {
+        for (j = 0; j < Y_VALUE; j++)
+            if (grid[i][j] == '*')
+                printf("*");
+            else
+                printf("%d", numOfBombs[i][j]);
+        printf("\n");
+    }
+}
+int main(void)
+{
+    char grid[X_VALUE][Y_VALUE + 1]; 
+    int numOfBombs[X_VALUE][Y_VALUE] = { 0 };
+
+    readBombInfo(grid);
+    countBomb(grid, numOfBombs);
+    display_numOfBombs(grid, numOfBombs);
+}
