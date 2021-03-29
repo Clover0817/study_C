@@ -1,0 +1,33 @@
+#include <stdio.h>
+
+int carryCount(int n1, int n2, int carry)
+{
+
+	if ((n1 % 10) == 0 && (n2 % 10) == 0)
+		return 0;
+	else if ((n1 % 10) + (n2 % 10) + carry >= 10) {
+		n1 /= 10;
+		n2 /= 10;
+		return carryCount(n1, n2, 1) + 1;
+	}
+	else {
+		n1 /= 10;
+		n2 /= 10;
+		return carryCount(n1, n2, 0);
+	}
+}
+
+int main(void)
+{
+	int num1, num2;
+	int carryNum = 0;
+
+	printf("Enter two numbers: ");
+	scanf("%d %d", &num1, &num2);
+
+	carryNum = carryCount(num1, num2, 0);
+	printf("%d\n", carryNum);
+
+	return 0;
+
+}
