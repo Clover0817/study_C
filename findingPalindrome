@@ -1,0 +1,57 @@
+#include <stdio.h>
+
+int calculateReverse(int n)
+{
+	int reversedNum = 0;
+
+	reversedNum = n % 10;
+	n = n / 10;
+	while (n >= 1) {
+		reversedNum = (reversedNum * 10) + (n % 10);
+		n = n / 10;
+	}
+
+	return reversedNum;
+}
+
+int findPalindrome(int num, int count)
+{
+	int reversedNum;
+	reversedNum = calculateReverse(num);
+
+	if ((num + reversedNum) < 0) {
+		return -1;
+	}
+		if (num == reversedNum) {
+			printf("%d ", count);
+			return num;
+		}
+		else if ((reversedNum + num) == calculateReverse(reversedNum + num)) {
+			count++;
+			printf("%d ", count);
+			return reversedNum + num;
+		}
+		else {
+		count++;
+		return findPalindrome((reversedNum + num), count);
+		}
+	
+}
+
+int main(void)
+{
+	int count = 0;
+	int number;
+	int palindrome;
+	printf("Enter a number: ");
+	scanf("%d", &number);
+
+	palindrome = findPalindrome(number, count);
+
+	if (palindrome == -1)
+		printf("Overflow\n");
+	else
+		printf("%d\n", palindrome);
+	
+	return 0;
+}
