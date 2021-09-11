@@ -1,0 +1,32 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+void print_reverse(char* str, int end)
+{
+	char* newStr;
+	int i;
+
+	newStr = (char*)malloc(sizeof(char) * (end + 1));
+	
+	for (i = 0; i <= end; i++)
+		newStr[i] = str[end - i];
+	newStr[i] = '\0';
+
+	strcpy(str, newStr);
+	printf("%s\n", str);
+}
+
+int main(void)
+{
+	char str[100];
+
+	printf("Enter any string: ");
+	scanf("%s", str);
+
+	printf("Reversed String is: ");
+	print_reverse(str, strlen(str) - 1);
+	
+	return 0;
+}
