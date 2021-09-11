@@ -1,11 +1,18 @@
-Score* biggerScore(Score s1, Score s2)
+Score* totalScore(Score s1, Score s2)
 {
-	Score* p1, * p2;
-	p1 = &s1;
-	p2 = &s2;
+	Score* p3;
 
-	if ((s1.midterm + s1.final) > (s2.midterm + s2.final))
-		return p1;
-	else
-		return p2;
+	p3 = (Score*)malloc(sizeof(Score));
+	if (p3 == NULL) {
+		fprintf(stderr, "메모리 부족으로 할당할 수 없습니다.");
+		exit(1);
+	}
+
+	p3->midterm = 0;
+	p3->final = 0;
+
+	p3->midterm = s1.midterm + s2.midterm;
+	p3->final = s1.final + s2.final;
+
+	return p3;
 }
