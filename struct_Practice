@@ -1,0 +1,11 @@
+Score* biggerScore(Score s1, Score s2)
+{
+	Score* p1, * p2;
+	p1 = &s1;
+	p2 = &s2;
+
+	if ((s1.midterm + s1.final) > (s2.midterm + s2.final))
+		return p1;
+	else
+		return p2;
+}
