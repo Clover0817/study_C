@@ -1,11 +1,6 @@
 Score* biggerScore(Score* p1, Score* p2)
 {
-	int s1 = 0, s2 = 0;
-
-	s1 = p1->midterm + p1->final;
-	s2 = p2->midterm + p2->final;
-
-	if (s1 > s2)
+	if ((p1->midterm + p1->final) > (p2->midterm + p2->final))
 		return p1;
 	else
 		return p2;
