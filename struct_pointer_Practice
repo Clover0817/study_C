@@ -22,11 +22,16 @@ Score* biggerScore(Score* p1, Score* p2)
 
 Score* totalScore(Score* p1, Score* p2)
 {
-	Score s3 = { 0, 0 };
 	Score* p3;
 
 	p3 = (Score*)malloc(sizeof(Score));
-	p3 = &s3;
+	if (p3 == NULL) {
+		fprintf(stderr, "메모리 부족으로 할당할 수 없습니다.");
+		exit(1);
+	}
+
+	p3->midterm = 0;
+	p3->final = 0;
 
 	p3->midterm = p1->midterm + p2->midterm;
 	p3->final = p1->final + p2->final;
@@ -35,11 +40,13 @@ Score* totalScore(Score* p1, Score* p2)
 }
 Score* createScore(int m, int f)
 {
-	Score s3;
 	Score* p3;
 
 	p3 = (Score*)malloc(sizeof(Score));
-	p3 = &s3;
+	if (p3 == NULL) {
+		fprintf(stderr, "메모리 부족으로 할당할 수 없습니다.");
+		exit(1);
+	}
 
 	p3->midterm = m;
 	p3->final = f;
@@ -49,15 +56,20 @@ Score* createScore(int m, int f)
 
 int main(void)
 {
-	Score s1 = { 50, 100 }, s2 = { 70, 70 };
 	Score* p1, * p2, * p3;
 
 	p1 = (Score*)malloc(sizeof(Score));
 	p2 = (Score*)malloc(sizeof(Score));
 	p3 = (Score*)malloc(sizeof(Score));
+	if (p1 == NULL || p2 == NULL || p3 == NULL) {
+		fprintf(stderr, "메모리 부족으로 할당할 수 없습니다.");
+		exit(1);
+	}
 
-	p1 = &s1;
-	p2 = &s2;
+	p1->midterm = 50;
+	p1->final = 100;
+	p2->midterm = 70;
+	p2->final = 70;
 
 	printScore(p1);
 	printScore(p2);
