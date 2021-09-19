@@ -1,0 +1,25 @@
+int main(void)
+{
+	StackType s;
+
+	init_stack(&s);
+	stack_print(&s);
+	push(&s, 10);
+	stack_print(&s);
+	push(&s, 20);
+	stack_print(&s);
+	push(&s, 30);
+	stack_print(&s);
+	push(&s, 40);
+	stack_print(&s);
+	pop(&s);
+	stack_print(&s);
+	push(&s,50);
+	stack_print(&s);
+	pop(&s);
+	stack_print(&s);
+	pop(&s);
+	stack_print(&s);
+	pop(&s);
+	stack_print(&s);
+}
