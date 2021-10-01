@@ -1,0 +1,153 @@
+#define _CRT_SECURE_NO_WARNINGS
+#define MAX_QUEUE_SIZE 3
+#define MAX_STRING_SIZE 100
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct {
+	char name[MAX_STRING_SIZE];
+	char gender;
+}element;
+
+typedef struct {
+	int front;
+	int rear;
+	element data[MAX_QUEUE_SIZE];
+} QueueType;
+
+void error(char* message)
+{
+	fprintf(stderr, "%s\n", message);
+	exit(1);
+}
+
+void init(QueueType* q)
+{
+	q->rear = 0;
+	q->front = 0;
+}
+
+int is_full(QueueType* q)
+{
+	if ((q->rear + 1) % MAX_QUEUE_SIZE == q->front)
+		return 1;
+	else
+		return 0;
+}
+
+int is_empty(QueueType* q)
+{
+	if (q->front == q->rear)
+		return 1;
+	else
+		return 0;
+}
+
+int enqueue(QueueType* q, element item)
+{
+	if (is_full(q))
+		return 1;
+	else {
+		q->rear = (q->rear + 1) % MAX_QUEUE_SIZE;
+		q->data[q->rear] = item;
+		return 0;
+	}
+}
+
+element dequeue(QueueType* q)
+{
+	if (is_empty(q)) {
+		error("큐가 공백상태입니다.");
+		exit(1);
+	}
+	else {
+		q->front = (q->front + 1) % MAX_QUEUE_SIZE;
+		return q->data[q->front];
+	}
+}
+
+int get_count(QueueType* q)
+{
+	if (q->rear < q->front)
+		return MAX_QUEUE_SIZE - (q->front - q->rear);
+	else
+		return q->rear - q->front;
+}
+
+void print_queue(QueueType* q)
+{
+	int size = get_count(q);
+	int i, j;
+
+	j = q->front;
+	for (i = 0; i < size; i++) {
+		j++;
+		printf("%s ", q->data[j].name);
+		if (j == MAX_QUEUE_SIZE - 1)
+			j = 0;
+	}
+	printf("\n");
+}
+
+int main(void)
+{
+	QueueType manQ, womanQ;
+	element newPerson;
+	char input;
+	int full;
+
+	init(&manQ);
+	init(&womanQ);
+
+	printf("미팅 주선 프로그램입니다.\n");
+	printf("i<nsert, 고객입력>, c<heck, 대기자 체크>, q<uit>: ");
+	scanf("%c", &input);
+	while (input != 'q') {
+		full = 0;
+		if (input == 'i') {
+			printf("이름을 입력: ");
+			scanf("%s", newPerson.name);
+			while (getchar() != '\n');
+			printf("성별을 입력<m or f>: ");
+			scanf("%c", &newPerson.gender);
+			if (newPerson.gender == 'm') {
+				if (enqueue(&manQ, newPerson))
+					full = 1;
+			}
+			else {
+				if (enqueue(&womanQ, newPerson))
+					full = 1;
+			}
+
+			if (!(is_empty(&manQ)) && !(is_empty(&womanQ))) {
+				printf("커플이 탄생했습니다! %s과 %s\n", womanQ.data[womanQ.front + 1].name, manQ.data[manQ.front + 1].name);
+				dequeue(&womanQ);
+				dequeue(&manQ);
+			}
+			else {
+				printf("아직 대상자가 없습니다. ");
+				if (newPerson.gender == 'm') {
+					if (full == 1)
+						printf("대기자가 꽉찼으니 담기회를 이용\n");
+					else
+						printf("기다려주십시요.\n");
+				}
+				else {
+					if (full == 1)
+						printf("대기자가 꽉찼으니 담기회를 이용\n");
+					else
+						printf("기다려주십시요.\n");
+				}
+			}
+		}
+		else if (input == 'c') {
+			printf("남성 대기자 %d명: ", get_count(&manQ));
+			print_queue(&manQ);
+			printf("여성 대기자 %d명: ", get_count(&womanQ));
+			print_queue(&womanQ);
+		}
+
+		printf("i<nsert, 고객입력>, c<heck, 대기자 체크>, q<uit>: ");
+		scanf("%c", &input);
+	}
+}
