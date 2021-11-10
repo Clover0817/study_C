@@ -37,8 +37,7 @@ int get_nonleaf_count(TreeNode* t)
 		return 0;
 	if ((t->left != NULL) || (t->right != NULL))
 		count = 1 + get_nonleaf_count(t->left) + get_nonleaf_count(t->right);
-	else
-		count = get_nonleaf_count(t->left) + get_nonleaf_count(t->right);
+
 	return count;
 }
 
@@ -50,8 +49,7 @@ int get_oneleaf_count(TreeNode* t)
 		return 0;
 	if (((t->left != NULL) && (t->right == NULL)) || ((t->left == NULL) && (t->right != NULL)))
 		count = 1 + get_oneleaf_count(t->left) + get_oneleaf_count(t->right);
-	else
-		count = get_oneleaf_count(t->left) + get_oneleaf_count(t->right); 
+		
 	return count;
 }
 
@@ -111,12 +109,14 @@ void node_increase(TreeNode* node)
 
 int equal(TreeNode* t1, TreeNode* t2)
 {
-	if (t1 != NULL) {
+	if ((t1 != NULL) && (t2 != NULL)) {
 		if (t1->data != t2->data)
 			return 0;
 		equal(t1->left, t2->left);
 		equal(t1->right, t2->right);
 	}
+	else if ((t1 != NULL && t2 == NULL) || (t1 == NULL && t2 != NULL))
+		return 0;
 	return 1;
 }
 
